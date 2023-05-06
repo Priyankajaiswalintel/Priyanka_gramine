@@ -39,3 +39,7 @@ option('vtune', type: 'combo', choices: ['disabled', 'enabled'],
 option('vtune_sdk_path', type: 'string',
     value: '/opt/intel/oneapi/vtune/latest/sdk',
     description: 'Path to the VTune SDK installation')
+    
+option('vtune_library', type: 'string',
+        value: '/gramine/ittnotify',
+         description: 'Path to the Ittnotify')
