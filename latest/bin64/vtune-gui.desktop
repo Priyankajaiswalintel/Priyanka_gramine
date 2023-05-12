@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Intel VTune Profiler
+GenericName=VTune
+Exec=bash -c "export PATH=$PATH:`dirname %k`; vtune-gui"
+Terminal=false
+MimeType=text/plain;
+Icon=./resources/app/icons/VTune.png
+Categories=Development;
+StartupNotify=false
+Actions=Window;

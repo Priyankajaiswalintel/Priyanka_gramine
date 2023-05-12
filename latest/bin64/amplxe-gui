@@ -1,0 +1,3 @@
+#!/bin/sh
+
+echo "Warning: The command line amplxe-gui is deprecated. Use vtune-gui instead."

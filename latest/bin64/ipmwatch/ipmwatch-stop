@@ -1,0 +1,38 @@
+#!/bin/bash
+
+# COPYRIGHT
+#  * -------------------------------------------------------------------------
+#  *               INTEL CORPORATION PROPRIETARY INFORMATION
+#  *  This software is supplied under the terms of the accompanying license
+#  *  agreement or nondisclosure agreement with Intel Corporation and may not
+#  *  be copied or disclosed except in accordance with the terms of that
+#  *  agreement.
+#  *        Copyright (C) 2017 - 2019 Intel Corporation. All Rights Reserved.
+#  * -------------------------------------------------------------------------
+# COPYRIGHT
+
+PROCESS_NAME="ipmwatch"
+
+ipmw_pid_str=`ps -eo pid,comm | grep -w ${PROCESS_NAME} | grep -v ${PROCESS_NAME}-stop`
+
+if [[ -z ${ipmw_pid_str} ]] ; then
+	echo "IPMWatch is not running!"
+	exit
+fi
+
+itr=1
+while [[ itr -le 10 ]]
+do
+	ipmw_pid=`echo ${ipmw_pid_str} | cut -d " " -f${itr}`
+	if [[ ! -z ${ipmw_pid} ]] ; then
+		break
+	fi
+	itr=`expr ${itr} + 1`
+done
+
+res=`kill -9 ${ipmw_pid}`
+if [[ $? -eq 0 ]] ; then
+	echo "IPMWatch stopped successfully."
+else
+	echo "Unable to stop IPMWatch."
+fi

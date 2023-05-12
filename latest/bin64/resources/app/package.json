@@ -1,0 +1,1 @@
+{"main": "./scripts/index.js", "dependencies": {"yargs": "^16.2.0"}, "productName": "Intel VTune Profiler"}

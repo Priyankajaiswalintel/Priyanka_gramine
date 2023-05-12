@@ -1,0 +1,79 @@
+/*
+ * Copyright (C) 2021 Intel Corporation
+ *
+ * This software and the related documents are Intel copyrighted materials, and your use of them
+ * is governed by the express license under which they were provided to you ("License"). Unless
+ * the License provides otherwise, you may not use, modify, copy, publish, distribute, disclose
+ * or transmit this software or the related documents without Intel's prior written permission.
+ *
+ * This software and the related documents are provided as is, with no express or implied
+ * warranties, other than those that are expressly stated in the License.
+*/
+
+syntax = "proto3";
+
+package intel.analyzers.viewpointRegistry.v1;
+
+import "google/protobuf/empty.proto";
+
+service ViewpointRegistry {
+    rpc RegisterViewpoint (RegisterViewpointRequest) returns (google.protobuf.Empty);
+    rpc GetViewpoint (GetViewpointRequest) returns (GetViewpointResponse);
+}
+
+message Column {
+    string width = 1;
+}
+
+message Row {
+    string height = 1;
+}
+
+message Layout {
+    repeated Column columns = 1;
+    repeated Row rows = 2;
+}
+
+message Pane {
+    string content = 1;
+    bool default = 2;
+    int32 row = 3;
+    int32 rowSpan = 4;
+    int32 col = 5;
+    int32 colSpan = 6;
+}
+
+message Tab {
+    Layout layout = 1;
+    repeated Pane panes = 2;
+    string caption = 3;
+    string tooltip = 4;
+}
+
+enum ModuleType {
+    SCRIPT = 0;
+    STYLESHEET = 1;
+}
+
+message Module {
+    ModuleType type = 1;
+    string url = 2;
+}
+
+message ViewpointConfiguration {    
+    repeated Module modules = 1;
+    repeated Tab tabs = 2;
+}
+
+message RegisterViewpointRequest {
+    string analysisType = 1;
+    ViewpointConfiguration viewpointConfiguration = 2;
+}
+
+message GetViewpointRequest {
+    string analysisType = 1;
+}
+
+message GetViewpointResponse {
+    ViewpointConfiguration viewpointConfiguration = 1;
+}
